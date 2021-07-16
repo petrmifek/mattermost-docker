@@ -54,7 +54,7 @@ services:
       - POSTGRES_USER=${MM_USERNAME:-mattermost}
       - POSTGRES_PASSWORD=${MM_PASSWORD:-changemeReally!23453}
     volumes:
-      - ./volumes/db/var/lib/postgresql/data:/var/lib/postgresql/data
+      - ./volumes/db2/var/lib/postgresql/data:/var/lib/postgresql/data
       - /etc/localtime:/etc/localtime:ro
 
 
