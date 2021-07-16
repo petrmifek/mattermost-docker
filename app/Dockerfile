@@ -42,7 +42,7 @@ RUN mkdir -p /mattermost/data /mattermost/plugins /mattermost/client/plugins \
 #AA add czech WIP language
 RUN curl https://raw.githubusercontent.com/mattermost/i18n-wip/master/mattermost-server/cs.json > /mattermost/i18n/cs.json \
     && chown mattermost:mattermost /mattermost/i18n/cs.json
-COPY mattermost-webapp.tar.gz /mattermost
+COPY volumes/webapp-builder/mattermost-webapp.tar.gz /mattermost
 WORKDIR /mattermost
 RUN rm -rf client && tar -xzf mattermost-webapp.tar.gz && rm mattermost-webapp.tar.gz && chown -R mattermost:mattermost client
 WORKDIR /
@@ -53,7 +53,7 @@ USER mattermost
 HEALTHCHECK CMD curl --fail http://localhost:8000 || exit 1
 
 # Configure entrypoint and command
-COPY entrypoint.sh /
+COPY app/entrypoint.sh /
 ENTRYPOINT ["/entrypoint.sh"]
 WORKDIR /mattermost
 CMD ["mattermost"]
