@@ -1,0 +1,9 @@
+version: "3"
+
+services:
+  webapp-builder:
+    build:
+      context: webapp-builder
+    restart: "no"
+    volumes:
+      - ./volumes/webapp-builder:/output
