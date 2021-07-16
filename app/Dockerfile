@@ -39,6 +39,14 @@ RUN mkdir -p /mattermost/data /mattermost/plugins /mattermost/client/plugins \
 	&& chown -R mattermost:mattermost /mattermost /config.json.save /mattermost/plugins /mattermost/client/plugins \
 	&& setcap cap_net_bind_service=+ep /mattermost/bin/mattermost
 
+#AA add czech WIP language
+RUN curl https://raw.githubusercontent.com/mattermost/i18n-wip/master/mattermost-server/cs.json > /mattermost/i18n/cs.json \
+    && chown mattermost:mattermost /mattermost/i18n/cs.json
+COPY mattermost-webapp.tar.gz /mattermost
+WORKDIR /mattermost
+RUN rm -rf client && tar -xzf mattermost-webapp.tar.gz && rm mattermost-webapp.tar.gz && chown -R mattermost:mattermost client
+WORKDIR /
+
 USER mattermost
 
 #Healthcheck to make sure container is ready
