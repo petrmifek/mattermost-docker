@@ -8,3 +8,4 @@
 #volumes/*
 #!volumes/webapp-builder
 
+.env
